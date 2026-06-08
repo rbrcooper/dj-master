@@ -1,0 +1,6 @@
+mastering:
+  target_lufs: -14.0
+  highpass_cutoff_hz: 30.0
+  limiter_threshold_db: -1.0
+  export_mp3: true
+  mp3_bitrate: "320k"

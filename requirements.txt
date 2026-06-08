@@ -1,0 +1,6 @@
+pedalboard
+pyloudnorm
+soundfile
+pydub
+pyyaml
+tqdm
