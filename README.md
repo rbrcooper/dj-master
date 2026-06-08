@@ -6,9 +6,10 @@ Built for house and techno mixes, this pipeline uses a deliberately light touch 
 
 ## What It Does
 1. **High-pass filter (30Hz):** Removes sub-bass rumble and DC offset (which Pioneer CDJs/recorders sometimes introduce) without affecting audible frequencies.
-2. **Soft limiter (-1dBTP):** A safety net that prevents digital clipping without heavily compressing the mix.
-3. **Loudness normalization (-14 LUFS):** Normalizes the mix to the standard loudness target used by SoundCloud, Spotify, and Apple Music.
-4. **Export:** Outputs a high-quality lossless `.wav` for your archives and a `320kbps .mp3` for easy sharing.
+2. **Compressor (Leveler):** Acts as an automatic gain control. It gently pushes down tracks that are too loud, allowing quieter tracks to be brought up, making the overall mix perfectly balanced.
+3. **Soft limiter (-1dBTP):** A safety net that prevents digital clipping without heavily compressing the mix.
+4. **Loudness normalization (-14 LUFS):** Normalizes the mix to the standard loudness target used by SoundCloud, Spotify, and Apple Music.
+5. **Export:** Outputs a high-quality lossless `.wav` for your archives and a `320kbps .mp3` for easy sharing.
 
 ## Setup
 
@@ -36,6 +37,8 @@ The script will process the audio and create two new files in the same directory
 You can tweak the processing parameters in `config.yaml`:
 - `target_lufs`: Target loudness. `-14.0` is standard, but you can push it to `-12.0` if you want a louder master.
 - `highpass_cutoff_hz`: Set to `30.0` to cut sub-bass noise.
+- `compressor_threshold_db`: How far down the track volume needs to be before compression starts (default `-18.0`).
+- `compressor_ratio`: How strongly to compress the loud parts (default `2.5`).
 - `limiter_threshold_db`: Set to `-1.0` to prevent clipping.
 - `export_mp3`: Set to `true` or `false`.
 - `mp3_bitrate`: Default is `"320k"`.

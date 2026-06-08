@@ -3,7 +3,7 @@ import os
 import yaml
 import soundfile as sf
 import pyloudnorm as pyln
-from pedalboard import Pedalboard, HighpassFilter, Limiter
+from pedalboard import Pedalboard, HighpassFilter, Compressor, Limiter
 from pydub import AudioSegment
 
 def load_config(config_path="config.yaml"):
@@ -14,6 +14,8 @@ def load_config(config_path="config.yaml"):
     return {
         "target_lufs": -14.0,
         "highpass_cutoff_hz": 30.0,
+        "compressor_threshold_db": -18.0,
+        "compressor_ratio": 2.5,
         "limiter_threshold_db": -1.0,
         "export_mp3": True,
         "mp3_bitrate": "320k"
@@ -28,13 +30,16 @@ def process_audio(input_file):
     data, rate = sf.read(input_file)
     
     config = load_config()
-    target_lufs = config["target_lufs"]
-    hp_freq = config["highpass_cutoff_hz"]
-    limiter_thresh = config["limiter_threshold_db"]
+    target_lufs = config.get("target_lufs", -14.0)
+    hp_freq = config.get("highpass_cutoff_hz", 30.0)
+    comp_thresh = config.get("compressor_threshold_db", -18.0)
+    comp_ratio = config.get("compressor_ratio", 2.5)
+    limiter_thresh = config.get("limiter_threshold_db", -1.0)
 
     print("Building pedalboard chain...")
     board = Pedalboard([
         HighpassFilter(cutoff_frequency_hz=hp_freq),
+        Compressor(threshold_db=comp_thresh, ratio=comp_ratio, attack_ms=10.0, release_ms=100.0),
         Limiter(threshold_db=limiter_thresh)
     ])
 
