@@ -2,7 +2,6 @@
 
 A minimal-intervention Python script to automatically master your DJ mixes.
 
-Built for house and techno mixes, this pipeline uses a deliberately light touch to preserve your original sound while protecting against clipping and ensuring a consistent loudness for sharing or streaming.
 
 ## What It Does
 1. **High-pass filter (30Hz):** Removes sub-bass rumble and DC offset (which Pioneer CDJs/recorders sometimes introduce) without affecting audible frequencies.
